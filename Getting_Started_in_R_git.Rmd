@@ -1,0 +1,396 @@
+---
+title: "Put in your choice of a title"
+author: "Your Name"
+date: "Date You Finish"
+output: html_document
+---
+
+# Getting Started in R
+
+*This exercise was modified from Grayson et al. 2022 <https://www.sciencedirect.com/science/article/pii/S0025556422000499>, and they modified it from Data Visualization: A Practical Introduction by Kieran Healy <https://socviz.co/gettingstarted.html#gettingstarted> (Ch. 2).*
+
+Welcome! I'm using a R Markdown document to introduce the free statistical and graphical program R. R Markdown combines sections of text (like this) with sections of code (termed "code chunks"); the code chunks get executed in R, through the R Studio interface, which you're working in now. When you finish, you can produce a final document that combines text and output from code in a formatted style that is ready to turn in! 
+
+By working through this document, you'll learn some basics of R, R Studio, and R Markdown. *Make sure to type your answers to questions/completed tasks directly into this document, so they're included in the final assignment you turn in.* 
+
+At the very top of the file is a section of *metadata*, or information about what the file is and what it does. The metadata is delimited by three dashes at the start and another three at the end. If you create your own new R Markdown file in the future, the program automatically sets up the metadata, though you can always edit them later. 
+
+**Task: Change the title, author, and date to your values!** For now, keep the `output` line as it is; it determines the format when you create an exported document (terming "knitting").
+
+You can type in a Markdown file just like text in a word-processing document. Give it a try to answer these questions:
+
+**Question: How much have you done coding or used the R programming language before?**
+
+*Your answer* 
+
+**Question: Describe your experience and comfort level with coding or R in the space below.** If you have experience, please tackle the advanced exercises as you work through this handout. If you are new to R, please consult us and your classmates with questions along the way as we develop our skills together!
+
+*Your answer* 
+
+## This Document is an RMarkdown File
+
+In R Markdown, **code chunks** are specially delimited sections of the file for code, which runs in R. The green arrow on the chunk's right will run the code within the chunk in the R console (bottom left corner of the R Studio frame). You should see the output both in the console and below the code chunk.
+
+* Code chunks start and end with three **`** marks (not single quotation marks, but the tilda button under the Esc key). 
+* Everything in between the marks is R code that will be executed in the console of R Studio. 
+* Code chunks also start by identifying the programming language, such as r, in curly brackets (see below); in those brackets, you can also name the chunk or set other options, though it's not required. 
+* Use hashtags to comment within code. This is generally best practice for annotating/explaining code, but it should be short. For more extensive comments or commentary, use the text sections of the Markdown file.
+* You will gain experience by modifying the code, more and more so through the next few weeks. I will give instructions about those tasks in the (white) text areas.
+
+```{r first chunk}
+# This is your first code chunk
+# You can include text within code chunks, but you need a hashtag--this tells R to ignore it (it's not code)
+
+# R can do math:
+2+2
+
+# But many R commands use functions, like these simple ones:
+sqrt(10)
+
+print("R code is cool")
+
+# When you click the run arrow, the output should appear below the chunk and in the RStudio Console
+
+```
+
+You can add your own chunk by moving the cursor to a blank line and choosing Code \> Insert Chunk from the RStudio menu, or clicking the green square with the white C and the + sign in the bar then selecting R. When you do either of these, an empty chunk will appear in your file. You can also type 3 **`**, add your code, then close with another 3 **`**.
+
+**Task: Create your own code chunk in the blank lines below (Chunk #2) and write some example code similar to chunk #1 (or any code that know that you would like to include)**
+
+
+
+
+## Exporting your Markdown file
+
+When you click the **Knit** button at the top (with the blue ball of yarn icon), it will generate a document that includes both content as well as the output of any embedded R code chunks within the document (unless you exclude it from the document, like the next setup code chunk below). Save your R Markdown (Rmd) file and try it out now! Note that you'll knit again at the end when you finish to generate your final output to turn in.
+
+**Advanced options**: Learn about customizing the appearance of code chunks in Markdown: <https://r4ds.had.co.nz/r-markdown.html#code-chunks>
+
+The open source book "R for Data Science" is the fundamental R skills book by Hadley Wickham (Chief Scientist at RStudio) and Garrett Grolemund (Principal Data Science Educator at RStudio) <https://r4ds.had.co.nz/> Check out section 27.4.2 and try out some of the display options in your practice chunk (*again, optional for those who are experienced using R*)
+
+## Load Libraries
+
+Packages are sets of code (and sometimes data) that others have written to make it easier to carry out certain analyses in R--like making a figure or calculating summary statistics. They are kind of like apps on a device. To use them, you first have to install them (like downloading an app), which adds them to your directory, or library, in R. Then you have to load them (like opening the app). You only have to install packages once; after that, you only need to load them from your library when you start a session in R. You can install packages from the "Files" frame in the bottom right corner of R Studio; you can also type the command `install(name of package)` in the console.  
+
+To use installed packages, we use the command `libraries("name of package")`. (Note the quotation marks!) Without this step, R will not be able to find the functions contained in these packages. The best practice is to load (using library commands) all the packages we need at the top of the R Markdown document, or at the start of an R script if you're working in that platform. 
+
+In RStudio Cloud, I install the packages you need, but you still need to run the code to load the libraries. Today we will be using the tidyverse family of functions, which includes `ggplot`. **add more here if needed, and fix code below to match** The chunk below loads these libraries.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# opts_chunk$set() is a function that will affect all code chunks in the report.
+# echo = TRUE displays both the code and results in the knitted file.
+# The global chunk options become the defaults for the rest of the document. 
+# If you want a particular chunk to have a different appearence you can specify a different option within that chunk (as we've done here with include=FALSE in the header)
+
+# If you are working in R Studio Cloud, these packages have already been installed in this workspace. If you are using R Studio Desktop, you would need to first check that these packages are locally installed. If they are not, you can delete the hashtags below to run the install code. 
+
+#install.packages("tidyverse")
+#install.packages("socviz")
+#install.packages("tinytex")
+#install.packages("knit")
+
+library(tidyverse)
+library(socviz)
+library(tinytex)
+```
+
+## A few fundmental things to know about R
+
+### Everything is an object
+
+The R coding language is based on objects. These can take many forms, but often include data that can be numbers, words/characters, lists, or even data tables. They can also be output from analyses (e.g., a figure or results from a statistical test). You can directly type objects into R, import them from other files such as a spreadsheet, or generate them using code. Assign a name to objects using a left-facing "arrow" as in: Name <- data. After you name an object, you can refer to it later, and R will use whatever is to the right of the arrow when carrying out a function. _Hint: Make names short, and avoid any R code terms such as mean_
+
+**Task: Add annotations next to the hashtags in the code chunk below (as demonstrated in the first line of code) to note what the code is doing: NOTE THAT THIS TASK MAY REQUIRE MORE BACKGROUND--PROVIDE HERE OR IN READING??**
+
+```{r create_objects}
+c(1, 2, 3, 1, 3, 5, 25)
+# c() combines values into a vector, an example of an R object
+# These should print below
+
+my_numbers <- c(1, 2, 3, 1, 3, 5, 25)
+# 
+# Note: You can see the active objects in the environment window on the top right of your screen
+
+your_numbers <- c(5, 31, 71, 1, 3, 21, 6)
+# 
+```
+
+```{r print your object}
+my_numbers
+
+# 
+
+```
+
+### Do things in R using functions
+
+A function's arguments are the things the function needs to know in order to do something.
+
+```{r this_will_error, eval = FALSE}
+# functions need arguments
+mean()
+
+# The Markdown file will not knit with an error in the code, but we wanted to demonstrate 
+# getting an error. Thus this chunk has eval = FALSE in the header to display the code but 
+# suppress running the chunk or displaying the output
+```
+
+**Question:** Why do you get an error? How do you find out what arguments the mean function needs? (You will fix it in the next code chunk) _Hint: run this chunk and look at the output in the console pane or above--it will give you information about the error._ 
+
+*Your answer:*
+
+
+**Task: Follow the example below to add code to the chunk that will calculate the mean of the object your_numbers**
+
+```{r mean function_correct}
+mean(x = my_numbers)
+
+# While the function arguments have names that are used internally, (here x), 
+# you don’t strictly need to specify the name for the function to work
+mean(my_numbers)
+
+# below add code to calculate the mean of your_numbers
+
+
+
+```
+
+Let's try another function: `summary()`
+```{r summary_example}
+summary(my_numbers)
+
+# You can also assign results to an object
+my_summary <- summary(my_numbers)
+```
+
+**Question:** Run the code in the chunks above and below this question. Based on the output, what does this function (`summary`) do?
+
+*Your answer*
+
+```{r call the summary}
+my_summary
+```
+
+### Functions come in libraries
+
+Functions from libraries are "pre-coded" to perform tasks without writing commands from scratch. 
+
+**Task: Run the code, then add annotations next to the hashtags in the code chunk to note what each of these functions doing:**
+
+```{r more functions}
+
+table(my_numbers)
+#
+
+sd(my_numbers)
+#
+
+```
+
+### If you're not sure what an object is, ask for its class
+The code chunk below gives some examples for doing this. Run it to see what the output looks like. 
+
+```{r getclass}
+class(my_numbers)
+class(my_summary)
+class(summary)
+```
+
+Objects can change class based on the inputs:
+
+```{r changeclass}
+my_new_vector <- c(my_numbers, "Apple")
+
+```
+
+**Task: How do you look at the information in your new object `my_new_vector`? What data class does your new object contain?** Create your own code chunk that answers these questions:
+
+
+
+
+### Using Datasets
+
+Some libraries have data files associated with the package of functions. The socviz library has a small dataframe called "titanic"
+
+```{r titanic1}
+titanic
+class(titanic)
+```
+
+You can call just a portion of the data using the \$ to designate a column
+
+```{r titanic2}
+titanic$percent
+
+
+```
+
+**Task 8: How would you select the sample size column in the titanic dataset? Create your own code chunk below to return the values in the "n" column:**
+
+
+
+The tidyverse uses an augmented version of a data frame called a tibble. Tibbles have some features that can become important. For example, on its own it will never change the name of variable, or the type of input (e.g., from factor to character). Let's make R treat the previous dataframe as a tibble:
+
+```{r titanic3}
+titanic_tb <- as_tibble(titanic)
+titanic_tb
+```
+
+**Queston:** What differences (if any) do you see in the data frame vs. the tibble in this example?
+
+*Your answer:*
+
+
+**Introduction to graphing with R**
+R is does an amazing job with figures. We're going to focus on using the function `ggplot`. For now, just follow the code I provide; later I'll show you ways to build and customize your own figures.
+
+```{r intro ggplot}
+
+ggplot(titanic_tb, aes(x = sex, y = percent)) + #this line identifies the data set, x, and y variables)
+  geom_boxplot() #this line says how to graph the data
+```
+
+## Wrapping up: Be patient with R, and with yourself
+
+Here are three very specific things to watch out for when writing R code:
+
+-   Make sure parentheses are balanced and that every opening "`(`" has a corresponding closing "`)`".
+-   Make sure you complete your expressions. If you think you have completed typing your code, but instead of seeing the `>` command prompt at the console you see the `+` character instead, that may mean R thinks you haven't written a complete expression yet. You can hit `Esc` or `Ctrl-C` to force your way back to the console and try typing your code again.
+-   In ggplot specifically, as you will see, we will build up plots a piece at a time by adding expressions to one another. When doing this, make sure your `+` character goes at the end of the line, and not the beginning. That is, write this:
+
+```{r ggplot1}
+ggplot(data = mpg, aes(x = displ, y = hwy)) +
+    geom_point()
+```
+
+and not this:
+
+```{r ggplot2, echo=TRUE, eval=FALSE}
+ggplot(data = mpg, aes(x = displ, y = hwy)) 
++ geom_point()
+
+# What do you need to fix here?
+# Our header includes echo=TRUE [show the code], eval=FALSE [don't run the code] 
+# for the knitted output document since we know there is an error. You can leave 
+# this header so your fixed code prints in the output file, but not a duplicate of the graph
+```
+
+
+## Get data into R
+
+To practice more with R and descriptive data analysis, we are going to use a dataset collected by Pacific students about the distribution of poison oak on trees in a local forest. We'll call the file poak. I've saved a .csv file (this is the best format for importing data), and we'll import it from github. Later, I'll show you how to import your own data sets. 
+
+```{r PO data, echo = TRUE} 
+#to above add eval = FALSE if data preloaded
+
+url <- "https://raw.githubusercontent.com/slhalpern/PUEcology-course/refs/heads/main/PoisonOak.csv"
+
+poak <- read_csv(file = url)
+```
+
+
+## Try out your own code!
+
+**Task: Insert a code chunk and use the summary function to see the variables in the poak dataset. Then use the mean function to calculate an overall mean for the dbh.** dbh (in cm) is a measure of tree diameter, measured at "breast" height, or 1.4 m from the ground--so at my nose! *Hint: return to the titanic data to remember how to select a specific column. Hint: Make sure you have the names of the columns correct, lowercase and uppercase characters matter in variable names.*
+
+```{r summary_poak}
+
+summary(poak)
+```
+
+**Questions:** What is the range of values for dbh?
+
+*Your answer:* 
+
+### Summarizing data by groups
+In biology, we're often interested in calculating central tendency and spread variables by groups--e.g., comparing a treatment and a control group. We can do that in the `tidyverse` by using `group_by` as in the code below. 
+
+```{r summarizing poak by group}
+poak |> #|> tells R to take the output of this line and pass it to the next line of code--it's called a pipe
+  group_by(Presence) |> # this groups data by the presence of poison oak
+  summarize(avg.dbh = mean(dbh))
+```
+
+**Question:** Are trees with poison oak larger or smaller than those without it?
+
+*Your answer:*
+
+
+We might want to calculate more than just the mean for groups. For example, we might want to know how many observations are in each group (`length` counts this), the standard deviation for each group (`sd`), the variance for each group (`var`), the smallest (`min`) and largest (`max`) value for each group, or the median for each group (`median`). 
+
+**Task: Cut and paste the code chunk above (removing the hashtag comments), then modify it to calculate these different variables.** Hint: If you want to see them all in one table, put a comma in between the last 2 parentheses in the `summarize` line of code, hit return, add the next variable (be sure to name it before the = sign!), and repeat.
+
+```{r summarizing poak by group2}
+poak |> 
+  group_by(Presence) |> 
+  summarize(avg.dbh = mean(dbh),
+            n.dbh = length(dbh),
+            sd.dbh = sd(dbh),
+            var.dbh = var(dbh),
+            min.dbh = min(dbh),
+            max.dbh = max(dbh),
+            median.dbh = median(dbh))
+```
+
+
+## Make afigure
+
+We will now use the poak data to make two figures using `ggplot`. I will walk you through the first one, then you will make subsequent ones more independently. 
+
+We'll start by making a histogram of the dbh data. I'll provide the code, but will ask you to replace my text with the appropriate information/variable whereever there are ALL CAPS.
+
+```{r histogram, eval = FALSE}
+# remove eval = FALSE for student version
+
+ggplot(data = NAME.OF.DATA.FILE, aes(x = VARIABLE.TO.PLOT)) 
+
+
+# Watch your parentheses! One of the most common errors is missing closing one! 
+```
+
+```{r histogram2}
+
+ggplot(data = poak, aes(x = dbh)) 
+
+
+# Watch your parentheses! One of the most common errors is missing closing one! 
+```
+
+Why is the graph blank? We need to add a geom, which tells R what kind of graph to make! Add `geom_histogram()` to your code using the plus sign at the end of the first line (with the geom on the 2nd line). Often you will see ggplot code written with each argument on a different line; again, each line ENDS with a + sign, which tells R to add the next line to the figure being built.
+
+
+```{r poak_add geom}
+
+
+
+
+```
+
+**Question:** Describe the histogram you created.
+
+*Your answer:*
+
+**Advanced:** If you have used R and ggplot before, or just want to explore it, try changing the bin width or number of bins, the orientation (horizontal vs. vertical), or something else you want to play with. <https://ggplot2.tidyverse.org/reference/geom_histogram.html> has information on the code. 
+
+
+**Task: make a boxplot, using geom_boxplot**
+Boxplots are some of the most useful figures in ecology because they provide a lot of information about the data. Here, make a boxplot for dbh separated by trees with and without poison oak. I provide the code this time; in the future, use this code as a model to make your own boxplots. 
+
+**Advanced:** If you have used R and ggplot before, or just want to explore it, try changing the color, scale, or some other display feature of the boxplot. See this guide for examples of changes you can make to boxplots, and the code to do so: <https://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization>
+
+```{r boxplot}
+
+ggplot(poak, aes(Presence, dbh)) +
+  geom_boxplot()
+
+```
+
+**Question:** Describe the boxplot you created, including information about both the central tendency and the spread. 
+
+*Your answer:*
+
+Congrats! You have navigated through your first R Markdown file and run the code to produce a figure! Next time we'll make more exploratory figures, and start to carry out statistical analyses. 
+
+
