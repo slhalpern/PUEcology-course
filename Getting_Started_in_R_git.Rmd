@@ -9,7 +9,7 @@ output: html_document
 
 *This exercise was modified from Grayson et al. 2022 <https://www.sciencedirect.com/science/article/pii/S0025556422000499>, and they modified it from Data Visualization: A Practical Introduction by Kieran Healy <https://socviz.co/gettingstarted.html#gettingstarted> (Ch. 2).*
 
-Welcome! I'm using a R Markdown document to introduce the free statistical and graphical program R. R Markdown combines sections of text (like this) with sections of code (termed "code chunks"); the code chunks get executed in R, through the R Studio interface, which you're working in now. When you finish, you can produce a final document that combines text and output from code in a formatted style that is ready to turn in! 
+Welcome! I'm using a R Markdown document to introduce the free statistical and graphical program R. R Markdown combines sections of text (like this) with sections of code (termed "code chunks"); the code chunks get executed in R, through the R Studio interface, which you're working in now. When you finish, you can produce a final document that combines text and output from code in a formatted style that is ready to turn in! *(Note: Submit your knitted assignment through the Moodle assignment link.)*
 
 By working through this document, you'll learn some basics of R, R Studio, and R Markdown. *Make sure to type your answers to questions/completed tasks directly into this document, so they're included in the final assignment you turn in.* 
 
