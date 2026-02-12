@@ -368,7 +368,16 @@ kale |> #|> tells R to take the output of this line and pass it to the next line
 
 What grouping variable did you choose? *Your answer:*
 
-Is your variable larger or smaller in fertilized plants compared to unfertilized plants? *Your answer:*
+For which group is RGR higher? *Your answer:*
+
+**Task** Add code to the chunk above (or add a new chunk below) to calculate a different average response (dependent) variable for fertilized vs. unfertilized plants. Run the chunk and answer the questions below. 
+
+**Questions:** 
+
+What response (dependent) variable did you choose? *Your answer:*
+
+Is your response (dependent) variable higher in fertilized or unfertilized plants? 
+*Your answer:*
 
 Does the effect of fertilizer on your variable makes sense? Briefly (in a sentence or so) explain your reasoning. *Your answer:*
 
@@ -377,7 +386,7 @@ Does the effect of fertilizer on your variable makes sense? Briefly (in a senten
 
 We might want to calculate more than just the mean for groups. For example, we might want to know how many observations are in each group (`length` counts this), the standard deviation for each group (`sd`), the variance for each group (`var`), the smallest (`min`) and largest (`max`) value for each group, or the median for each group (`median`). 
 
-**Task: Cut and paste the code chunk above, then modify it to calculate these different variables.** Hint: If you want to see them all in one table, put a comma in between the last 2 parentheses in the `summarize` line of code, hit return, add the next variable (be sure to name it before the = sign!), and repeat. *Note: Do NOT use na.rm = TRUE for length*
+**Task: Cut and paste the code chunk above that calculates the mean, then modify it to calculate these different variables.** Hint: If you want to see them all in one table, put a comma in between the last 2 parentheses in the `summarize` line of code, hit return, add the next variable (be sure to name it before the = sign!), and repeat. *Note: Do NOT use na.rm = TRUE for length*
 
 ```{r summarizing poak by group2}
 kale |> 
@@ -410,7 +419,7 @@ ggplot(data = kale, aes(x = RGR))
 
 Ooops! Why is the graph blank? 
 
-We need to add a geom, which tells R what kind of graph to make! **TASK** Copy the code above, then add `geom_histogram()` to your code using the plus sign at the end of the first line (with the geom on the 2nd line). *Note: Often you will see ggplot code written with each argument on a different line to make it easier to follow; again, each line ENDS with a + sign, which tells R to add the next line to the figure being built.*
+We need to add a geom line of code, which tells R what kind of graph to make! **TASK** Copy the code above, then add `geom_histogram()` to your code using the plus sign at the end of the first line (with the geom on the 2nd line). *Note: Often you will see ggplot code written with each argument on a different line to make it easier to follow; again, each line ENDS with a + sign, which tells R to add the next line to the figure being built.*
 
 ```{r histogram add geom}
 
@@ -431,7 +440,7 @@ Boxplots are some of the most useful figures in ecology because they provide a l
 
 **ADVANCED:** If you have used R and ggplot before, or just want to explore it, try changing the color, scale, or some other display feature of the boxplot. See this guide for examples of changes you can make to boxplots, and the code to do so: <https://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization>
 
-```{r boxplot}
+```{r kale boxplot}
 
 # Delete this and put your code here!
 
