@@ -29,6 +29,7 @@ This chunk will load packages needed for today.
 ```{r load packages}
 #install.packages("onewaytests") #in case needed
 library(onewaytests) #in case needed
+library(car) #in case needed
 
 ```
 
@@ -88,7 +89,7 @@ onewaytests::nor.test(dbh~Presence, data=poak)
 ```
 
 Run the code chunk, and answer these questions: 
-a. Is tree size normally distributed in the two groups? Support your answer with specific information from the Shapiro-Wilk test.  
+a. Is tree size normally distributed in each of the two groups? Support your answer with specific information from the Shapiro-Wilk test.  
 
 
 b. Do the QQ plots suggest that tree size is normally distributed in the two groups?
@@ -118,6 +119,13 @@ test whether the variances for dbh are similar (or homogenous) in the two groups
 
 Below, I provide the code for you; you can refer to/copy and edit this example in the future as needed.
 
+``` {r Levene test}
+
+leveneTest(poak$dbh,poak$Presence) #Note: poak$ identifies the variable within the poak data set; this syntax works better for this test than naming the variables and the data set separately
+
+#Note: you may get warnings with this test--you can ignore them. Ask if you want to understand what they mean. 
+
+```
 
 
 Run the code chunk, and answer these questions: 
@@ -125,3 +133,6 @@ a. Is variance in tree size similar in the two groups? Support your answer with 
 
 
 b. How does these tests enhance your understanding of the data, compared to just looking at the box plots and histograms?
+
+
+**Congratulations! You've finished this assignment!**

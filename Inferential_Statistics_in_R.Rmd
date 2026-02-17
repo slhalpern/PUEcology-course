@@ -1,0 +1,112 @@
+---
+title: "Put in your choice of a title"
+author: "Your name"
+date: "Date you finish"
+output: pdf_document
+---
+
+
+# Statistics Exercise #2: Inferential statistics, or testing hypotheses
+## Ecology (Biol 404)
+
+In these exercises, you will practice some basic analyses using R. Again, you should expect to experience some frustration while learning R (I still do at times), but persist. You’re learning or practicing skills (e.g., analysis, coding, logical thinking, problem-solving) within a specific programming language and software, and those skills can be useful in many contexts--not just R.
+
+For these exercises, we will use the same dataset as exercise #1: data collected by Pacific students about the distribution of poison oak on trees in a local forest. I've created "poak," a .csv file (this is the best format for importing data). 
+
+If this data set isn't already loaded, use the code chunk below to do so. 
+
+```{r PO data, echo = FALSE, eval = TRUE, results = 'hide'} 
+#to above add eval = TRUE if data is not preloaded
+
+url <- "https://raw.githubusercontent.com/slhalpern/PUEcology-course/refs/heads/main/PoisonOak.csv"
+
+poak <- read_csv(file = url)
+
+url2 <- "https://github.com/slhalpern/PUEcology-course/blob/596df063d672b482290124799cc5e87b3951e67a/FlowerPhenology.csv"
+
+FlwrPhen <- read_csv(file = url2)
+```
+
+This chunk will load packages needed for today. 
+
+```{r load packages, results = 'hide'}
+#install.packages("onewaytests") #in case needed
+library(onewaytests) #in case needed
+library(car) #in case needed
+library(tidyverse)
+
+```
+
+Keep these analyses handy—you’ll use them in the next assignment as well. **Complete the assignment with your team. Each person should contribute, but you will turn in a single assignment.** Submit your knitted assignment through the Moodle assignment link.
+
+## Instructions
+For each task below, insert a code chunk below the task that will carry out the requested analysis/make the requested figure. Use the separate handout that provides examples of code, along with the "Getting Started in R" and "Descriptive Statistics in R" assignments. Remember to mark the start and end of each code chunk with the three ticks (under the Esc key), and give each chunk a unique name in the first line. I've set up a blank chunk for you in the first task that you can copy, paste, and modify for subsequent tasks, if you want. 
+
+```{r NAME OF CHUNK}
+#This is a sample chunk that you can copy, paste, and edit if you want. Delete these comments!
+
+```
+
+### Task 1: Does diameter differ for trees with and without poison oak?
+A former ecology class studied host tree choice by poison oak vines. They measured the size (dbh) of trees with and without poison oak. The H0 for this statistical analysis is that trunk diameter (or size) does not differ between trees with and without poison oak. The variable dbh is the trunk diameter in cm. Do the required analyses and answer the questions below. 
+
+a.	Identify the independent and dependent variables for this study. Check them before moving on.
+
+
+b. Review your descriptive data analysis from the previous assignment. Should you use a parametric or a nonparametric test to test the null hypothesis? Briefly explain the information you used to come to your conclusion. 
+
+
+c. Use the flow chart and your answer to part b to identify the type of test you should use. (Write it below.)
+
+
+d. What is the statistical null nypothesis for this test? Make it specific to the poison oak variables. 
+
+
+e. **write a code chunk** Use the examples in the Inferential Statistics handout to write a code chunk that will carry out your statistical test. Run the chunk. 
+
+
+
+
+f. Summarize the results--is the null hypothesis rejected or not? What evidence do you use to come to this conclusion? (Note: Some statistical tests in R report P values as Pr, where Pr stands for probability.)
+
+
+g. Write 1-2 sentences describing your results as you would in a paper. **See the Inferential Statistics document for guidance about how to write about statistical tests.** The sentences are with each specific test. *You can (and should!) plagiarize these sentences!*
+
+
+
+###Task 2: Has flowering time changed over the past century?
+To investigate possible effects of climate change on plants, ecologists in Ohio studied flowering time in columbine (*Aquilegia canadensis*) over the past century using herbarium specimens. They recorded the date that the plant flowered (DOY) as a Julian date, or the numeric day of the year (Jan 1 = day 1, Dec 31 = day 365, etc.). They also recorded the average temperature during the flowering season for each plant’s location (Temperature). These data are available in the FlwrPhen data file (uploaded at the start of this document).
+
+*Type your answers to each of the following questions below them. Places where you need to write and run code chunks are identified with **bold face**.* 
+
+a.	Identify the independent and dependent variables for this study. Check them before moving on.
+
+
+b. **write a code chunk** Do a descriptive data analysis, as in the previous assignment. You can divide different parts of this among your team members to save time. Note that you have some different descriptive analyses to do because the data is not in groups (so no boxplots or Levene tests, for example). If you’re not sure what to do, talk with me. Write a code chunk in the space below to run your descriptive data analyses, and run it. 
+
+
+
+
+
+c. Determine whether temperature and DOY are approximately normally distributed. Report the information you use to draw this conclusion; refer to information from part b.
+
+
+d. Given your conclusions on normality, what statistical test should you perform? Use the flow chart.
+
+
+e. What is the statistical null hypothesis for this test? Make it specific to the flowering phenology variables. 
+
+
+f. **write a code chunk** Use the examples in the Inferential Statistics handout to write a code chunk that will carry out your statistical test. Run the chunk. 
+
+
+
+
+g. Summarize the results--is the null hypothesis rejected or not? What evidence do you use to come to this conclusion? (Note: Some statistical tests in R report P values as Pr, where Pr stands for probability.)
+
+
+h. Write 1-2 sentences describing your results as you would in a paper. **See the Inferential Statistics document for guidance about how to write about statistical tests.** The sentences are with each specific test. *You can (and should!) plagiarize these sentences!*
+
+
+
+**Congratulations! You've finished this assignment!**
