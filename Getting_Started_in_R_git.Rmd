@@ -34,7 +34,7 @@ You can type in a Markdown file just like you type text in a word-processing doc
 
 ## Code chunks
 
-In R Markdown, **code chunks** are specially delimited sections of the file for code, which runs in R. The green arrow on the chunk's right will run the code within the chunk in the R console (bottom left corner of the R Studio frame--see the separate handout on R Studio). You should see the output both in the console and below the code chunk. A few points about code chunks: 
+In R Markdown, **code chunks** are specially delimited sections of the file for code, which runs in R. The green arrow on the chunk's right will run the code within the chunk in the R console (bottom left corner of the R Studio frame--see image in the Intro to R handout). You should see the output both in the console and below the code chunk. A few points about code chunks: 
 
 * Code chunks start and end with three **`** marks (not single quotation marks, but the bottom of the tilda button under the Esc key). 
 * Everything in between the start and end marks is R code that will be executed in the console of R Studio. 
