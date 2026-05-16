@@ -309,4 +309,154 @@ ggplot(data = mpg, aes(x = displ, y = hwy))
 # this header so your fixed code prints in the output file, but not a duplicate of the graph
 ```
 
+<<<<<<< HEAD
 Congrtulations! You've finished your introduction to R assignment!
+=======
+
+# Some other common & important R skills
+
+## Get data into R
+
+To practice more with R and graphing, we are going to use a dataset collected by Pacific students about caterpillars eating kale plants. We'll call the file kale. I've saved a .csv file (this is the best format for importing data), and we'll import it from github. Later, I'll show you how to import your own data sets. 
+
+```{r REU data, echo = TRUE} 
+#to above add eval = FALSE if data preloaded
+
+url <- "https://raw.githubusercontent.com/slhalpern/PUEcology-course/refs/heads/main/REU_2021.csv"
+
+kale <- read_csv(file = url)
+```
+
+
+## Summarizing data in various ways
+
+Let's start by practicing something you've already done using the data you imported. We'll look at the variable RGR, or relative growth rate, a measure of how fast an organism grows measured as g/g/day. 
+
+**Task: I've started a code chunk below. Add code to it that will summarize the variable RGR.**  *Hints: Return to the titanic data to remember how to select a specific column. Make sure you have the names of the columns correct, lowercase and uppercase characters matter in variable names.*
+
+```{r intro_kale}
+
+kale #remind yourself what this code does! It's OK to run the chunk to see what happens.
+
+#delete this comment and add code to summarize RGR here!
+
+```
+
+**QUESTION:** What is the average RGR? What is the range of values for RGR?
+
+*Your answer:* 
+
+
+## Summarizing data by groups
+In biology, we're often interested in calculating central tendency and spread variables by groups--e.g., comparing a treatment and a control group. We can do that in the `tidyverse` by using `group_by`. In the kale data set, groups include:
+
+* Temporal_Rep (week of the trial)
+* Mvmt_Trt (whether larvae could move between plants), and 
+* Fertilizer_Trt (whether plants were fertilized or not). 
+
+The code below shows how to summarize a variable by group.
+
+```{r summarizing kale by group}
+kale |> #|> tells R to take the output of this line and pass it to the next line of code--it's called a pipe
+  group_by(Fertilizer_Trt) |> # this groups data by fertilizer treatment. Note the pipe again!
+  summarize(avg.RGR = mean(RGR, na.rm = TRUE)) #na.rm = TRUE tells R to ignore any missing values, which are coded as NA in the data table
+```
+
+**Question:** Is RGR faster or slower in fertilized kale plants compared to unfertilized ones?
+
+*Your answer:*
+
+
+**Task** Add code to the chunk above (or add a new chunk below) to calculate average RGR for one of the other sets of groups. Rerun the chunk and answer the questions below. 
+
+**Questions:** 
+
+What grouping variable did you choose? *Your answer:*
+
+For which group is RGR higher? *Your answer:*
+
+**Task** Add code to the chunk above (or add a new chunk below) to calculate a different average response (dependent) variable for fertilized vs. unfertilized plants. Run the chunk and answer the questions below. 
+
+**Questions:** 
+
+What response (dependent) variable did you choose? *Your answer:*
+
+Is your response (dependent) variable higher in fertilized or unfertilized plants? 
+*Your answer:*
+
+Does the effect of fertilizer on your variable makes sense? Briefly (in a sentence or so) explain your reasoning. *Your answer:*
+
+
+
+
+We might want to calculate more than just the mean for groups. For example, we might want to know how many observations are in each group (`length` counts this), the standard deviation for each group (`sd`), the variance for each group (`var`), the smallest (`min`) and largest (`max`) value for each group, or the median for each group (`median`). 
+
+**Task: Cut and paste the code chunk above that calculates the mean, then modify it to calculate these different variables.** Hint: If you want to see them all in one table, put a comma in between the last 2 parentheses in the `summarize` line of code, hit return, add the next variable (be sure to name it before the = sign!), and repeat. *Note: Do NOT use na.rm = TRUE for length*
+
+```{r summarizing poak by group2}
+kale |> 
+  group_by(Fertilizer_Trt) |> 
+  summarize(avg.RGR = mean(RGR, na.rm = TRUE),
+            n.RGR = length(RGR),
+            sd.rgr = sd(RGR, na.rm = TRUE),
+            var.rgr = var(RGR, na.rm = TRUE),
+            min.rgr = min(RGR, na.rm = TRUE),
+            max.rgr = max(RGR, na.rm = TRUE),
+            median.rgr = median(RGR, na.rm = TRUE))
+```
+
+
+## Make a figure
+
+We will now use the kale data to make two figures using `ggplot`. I will walk you through the first one, then you will make subsequent ones more independently. Keep this file handy as a model for code you'll need later!
+
+We'll start by making a histogram of the rgr data. Run this chunk (again, click the green arrow in the top right corner of the chunk). 
+
+```{r histogram}
+
+ggplot(data = kale, aes(x = RGR))
+# Reminders: 
+# Put the name of your data file after data =
+# aes (short for aesthetic) tells R about the variables you'll use in the plot--here it's just one because it's a histogram
+# information for aes always goes inside parentheses; if there is more than one piece of information, they are separated by commas. See the Titanic examples above.
+# Watch your parentheses! One of the most common errors is missing closing one! 
+```
+
+Ooops! Why is the graph blank? 
+
+We need to add a geom line of code, which tells R what kind of graph to make! **TASK** Copy the code above, then add `geom_histogram()` to your code using the plus sign at the end of the first line (with the geom on the 2nd line). *Note: Often you will see ggplot code written with each argument on a different line to make it easier to follow; again, each line ENDS with a + sign, which tells R to add the next line to the figure being built.*
+
+```{r histogram add geom}
+
+
+
+
+```
+
+**QUESTION:** Describe the histogram you created--it's shape, distribution of the data, etc.
+
+*Your answer:*
+
+**ADVANCED:** If you have used R and ggplot before, or just want to explore it, try changing the bin width or number of bins, the orientation (horizontal vs. vertical), or something else you want to play with. <https://ggplot2.tidyverse.org/reference/geom_histogram.html> has information on the code. 
+
+
+**TASK: make a boxplot, using geom_boxplot**
+Boxplots are some of the most useful figures in ecology because they provide a lot of information about the data. Practice them by making a boxplot for rgr separated by the grouping variable of fertilizer treatment. Refer to the example above with the Titanic data and write (or edit!) code to make the boxplot.  
+
+**ADVANCED:** If you have used R and ggplot before, or just want to explore it, try changing the color, scale, or some other display feature of the boxplot. See this guide for examples of changes you can make to boxplots, and the code to do so: <https://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization>
+
+```{r kale boxplot}
+
+# Delete this and put your code here!
+
+
+```
+
+**QUESTION:** Describe the boxplot you created, including information about both the central tendency and the spread. 
+
+*Your answer:*
+
+Congrats! You have navigated through your first R Markdown file, written code, and produced figures! Next time we'll make more exploratory figures, and start to carry out statistical analyses. 
+
+
+>>>>>>> 14e6b6a522f5ca77ab38db34a2dd2a076626ed44
