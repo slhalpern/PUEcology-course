@@ -16,12 +16,21 @@ For these exercises, we will use a dataset collected by Pacific students about t
 
 If this data set isn't already loaded, use the code chunk below to do so. 
 
-```{r PO data, echo = FALSE} 
+```{r PO data, echo = FALSE, eval = TRUE} 
 #to above add eval = TRUE if data is not preloaded
 
 url <- "https://raw.githubusercontent.com/slhalpern/PUEcology-course/refs/heads/main/PoisonOak.csv"
 
 poak <- read_csv(file = url)
+```
+
+This chunk will load packages needed for today. 
+
+```{r load packages}
+#install.packages("onewaytests") #in case needed
+library(onewaytests) #in case needed
+library(car) #in case needed
+
 ```
 
 Keep these analyses handy—you’ll use them in the next assignment as well. **Complete the assignment individually; you are welcome to talk with each other but each person must carry out the analyses on their own.** Submit your knitted assignment through the Moodle assignment link.
@@ -35,8 +44,25 @@ For each task below, insert a code chunk below the task that will carry out the 
 
 ```
 
-### Task 1
-Write a code chunk (below) to make a histogram of dbh (this variable is the diameter of a tree at “breast” height, or 1.4 m off the ground, measured in cm).
+### Task 1: Summarize data numerically
+Write a code of chunk below to summarize the size (dbh) of trees by group--with or without poison oak. For each group (with and without poison oak), have R calculate the count of observations, the mean tree size, the median tree size, the largest and smallest tree size, the standard deviation in tree size, and the variance in tree size. 
+
+
+
+Run the code chunk, and answer these questions:
+
+a. Which group has more trees in it--with or without poison oak?
+
+
+b. In which group are trees bigger? What summary statistic(s) do you look at to draw your conclusion?
+
+
+c. In which group are trees more variable in size? What summary statistic(s) do you look at to draw your conclusion?
+
+
+
+### Task 2: Make a histogram
+Write a code chunk below to make a histogram of dbh (this variable is the diameter of a tree at “breast” height, or 1.4 m off the ground, measured in cm).
 
 
 
@@ -51,9 +77,62 @@ b. What are you looking at to make this judgement?
 c. If it doesn’t look normally distributed, how does it differ from normal, and how “badly”?
 
 
-### Task 2  (NOTE THEY ALREADY DID THIS IN THE LAST ASSIGNMENT)
-Write a code chunk below to make a box plot of dbh, grouping by Presence (this variable is whether or not the tree had poison oak growing on it) and paste it below. Answer these questions: 
-Does the variance look approximately equal between the groups? 
-What are you looking at to make this judgement? 
-If it doesn’t look equal, how does it differ, and how “badly”?
+### Task 3: Testing for normality, separately by group
+In addition to visually inspecting graphs to evaluate distributions, we can also statistically test them. We will test whether the tree size data are normally distributed using a **Shapiro-Wilk test**. This test evaluates the null hypothesis that the data ARE normally distributed. *If the P-value returned from the test is GREATER than 0.05, we accept the null hypothesis and conclude that the data’s distribution cannot be distinguished from normal.* We will also look at something called a **QQ plot**. When data are normally distributed, they fall close to the straight line on this plot; non-normal data deviate from the straight line. Intepreting QQ plots take practice--ask for help today, and this entire semester. 
 
+Below, I provide the code for you; you can refer to/copy and edit this example in the future as needed. 
+
+```{r normality test}
+
+onewaytests::nor.test(dbh~Presence, data=poak)
+
+```
+
+Run the code chunk, and answer these questions: 
+a. Is tree size normally distributed in each of the two groups? Support your answer with specific information from the Shapiro-Wilk test.  
+
+
+b. Do the QQ plots suggest that tree size is normally distributed in the two groups?
+
+
+c. How do these tests enhance your understanding of the data, compared to just looking at the histogram?
+
+
+
+### Task 4: Make a box plot
+Write a code chunk below to make a box plot of dbh, grouping by Presence (this variable is whether or not the tree had poison oak growing on it) and paste it below. You can use the boxplots from the Getting Started in R exercise as models for the code. 
+
+
+Run the code chunk, and answer these questions: 
+
+a. Does the variance look approximately equal between the groups? 
+
+
+b. What are you looking at to make this judgement? 
+
+
+c. If it doesn’t look equal, how does it differ, and how “badly”?
+
+
+### Task 5: Test whether variances are similar among groups
+test whether the variances for dbh are similar (or homogenous) in the two groups (with or without poison oak). For this, we’ll use the Levene test of homogeneity of variances—usually just called the Levene test. This test evaluates the null hypothesis that the variances ARE homogenous. *If the P-value returned from the test is GREATER than 0.05, we accept the null hypothesis and conclude that the groups’ variances are not significantly different than each other.* 
+
+Below, I provide the code for you; you can refer to/copy and edit this example in the future as needed.
+
+``` {r Levene test}
+
+leveneTest(poak$dbh,poak$Presence) #Note: poak$ identifies the variable within the poak data set; this syntax works better for this test than naming the variables and the data set separately
+
+#Note: you may get warnings with this test--you can ignore them. Ask if you want to understand what they mean. 
+
+```
+
+
+Run the code chunk, and answer these questions: 
+a. Is variance in tree size similar in the two groups? Support your answer with specific information from the Levene test.  
+
+
+b. How does these tests enhance your understanding of the data, compared to just looking at the box plots and histograms?
+
+
+**Congratulations! You've finished this assignment!**
