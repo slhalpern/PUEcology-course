@@ -132,7 +132,7 @@ Ooops! Why is the graph blank?
 
 We need to add a *geom*, which tells R what kind of graph to make! 
 
-**TASK** Add `geom_histogram()` to the code below using the plus sign at the *end* of the first line (with the geom on the 2nd line). *Note: Often you will see ggplot code written with each argument on a different line to make it easier to follow; again, each line ENDS with a + sign, which tells R to add the next line to the figure being built.*
+**TASK** Add `geom_histogram()` to the code below by adding the plus sign at the *end* of the first line and the geom command on a 2nd line). See a model in the previous assignment (for a boxplot) *Note: Often you will see ggplot code written with each argument on a different line to make it easier to follow; again, each line ENDS with a + sign, which tells R to add the next line to the figure being built.*
 
 ```{r histogram add geom}
 
@@ -149,7 +149,7 @@ ggplot(data = kale, aes(x = RGR))
 
 
 **TASK: make a boxplot, using geom_boxplot**
-Boxplots are some of the most useful figures in ecology because they provide a lot of information about the data. Practice them by making a boxplot for rgr separated by the grouping variable of fertilizer treatment. Refer to the example with the Titanic data from the previous assignmnet and write (or edit!) code to make the boxplot.  
+Boxplots are some of the most useful figures in ecology because they provide a lot of information about the data. Practice them by making a boxplot for rgr separated by the grouping variable of fertilizer treatment. Refer to the example with the Titanic data from the previous assignment and write (or edit!) code to make this boxplot.  
 
 **ADVANCED:** If you have used R and ggplot before, or just want to explore it, try changing the color, scale, or some other display feature of the boxplot. See this guide for examples of changes you can make to boxplots, and the code to do so: <https://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization>
 
@@ -165,6 +165,6 @@ Boxplots are some of the most useful figures in ecology because they provide a l
 *Your answer:*
 
 
-**Congrats!** You have written code and produced figures! Next we'll make more exploratory figures, and start to carry out statistical analyses. 
+**Congrats!** You have written more code and produced two key kinds of figures! Next we'll make more exploratory figures, and start to carry out statistical analyses. 
 
 
