@@ -310,8 +310,8 @@ Here are three very specific things to watch out for when writing R code:
 -   In ggplot specifically, we will build up plots a piece at a time by adding expressions to one another. *When doing this, make sure your `+` character goes at the end of the line, and not the beginning.* Run the two code chunks below to see what happens when you make a mistake with this.
 
 ```{r ggplot1}
-ggplot(data = mpg, aes(x = displ, y = hwy)) +
-    geom_point()
+ggplot(data = mpg, aes(x = displ, y = hwy)) 
+    + geom_point()
 ```
 
 
@@ -322,8 +322,7 @@ ggplot(data = mpg, aes(x = displ, y = hwy))
 
 # What do you need to fix here? Change it to be correct!
 # Note: Our header includes echo=TRUE [show the code], eval=FALSE [don't run the code] 
-# for the knitted output document since we know there is an error. Leave 
-# this header so your fixed code prints in the output file, but not a duplicate of the graph
+# for the knitted output document since we know there is an error. Leave this header so your fixed code prints in the output file, but not a duplicate of the graph
 ```
 
 
