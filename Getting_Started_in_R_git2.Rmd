@@ -20,11 +20,13 @@ knitr::opts_chunk$set(echo = TRUE)
 #install.packages("socviz")
 #install.packages("tinytex")
 #install.packages("knitr")
+#install.packages("car")
 
 library(tidyverse)
 library(socviz)
 library(tinytex)
 library(knitr)
+library(car)
 ```
 
 ## Get data into R
@@ -50,7 +52,6 @@ Let's start by practicing something you've done before, now using the data you j
 
 kale #remind yourself what this code does! It's OK to run the chunk to see what happens.
 
-#delete this comment and add code to summarize RGR here!
 
 ```
 
@@ -101,14 +102,17 @@ Does the effect of the group you chose on your variable make sense ? Briefly (in
 
 We might want to calculate more than just the mean for groups. For example, we might want to know how many observations are in each group (`length` counts this), the standard deviation for each group (`sd`), the variance for each group (`var`), the smallest (`min`) and largest (`max`) value for each group, or the median for each group (`median`). 
 
-**Task: Revise the code chunk below to calculate these different variables.** Start where the comment says "fill in new code here." Hint: If you want to see them all in one table, put a comma in between the last 2 parentheses in the `summarize` line of code, hit return, add the next variable (be sure to name it before the = sign!), and repeat. I have done this for you in the code chunk below--the final parentheses is at the end. *Note: Do NOT use na.rm = TRUE for length*
+**Task: Revise the code chunk below to calculate these different variables.** I've created the first couple code lines for you. Add the rest of the variables starting where the comment says "fill in new code here." See the Guide to Descriptive Statistics handout for examples of the code. *Note: Do NOT use na.rm = TRUE for length*
 
 ```{r summarizing kale by group3}
 kale |> 
   group_by(Fertilizer_Trt) |> 
   summarize(avg.RGR = mean(RGR, na.rm = TRUE),
+            count.RGR = length(RGR),
+            StDev.RGR = sd(RGR, na.rm = TRUE),
             #fill in new code here
-  ) #this parentheses closes the "summarize" command--without it you'll run into an error
+  ) 
+#the parentheses above closes the "summarize" command--without it you'll run into an error
 ```
 
 
@@ -136,8 +140,7 @@ We need to add a *geom*, which tells R what kind of graph to make!
 
 ```{r histogram add geom}
 
-ggplot(data = kale, aes(x = RGR))
-
+ggplot(data = kale, aes(x = "all", y = RGR)) 
 
 ```
 
